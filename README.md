@@ -12,12 +12,14 @@
     - [sass](#sass)
     - [PostgreSQL](#postgresql)
   - [アプリを動かす](#アプリを動かす)
-    - [Sprigソースコードの入手](#sprigソースコードの入手)
+    - [Sprig ソースコードの入手](#sprig-ソースコードの入手)
     - [環境変数の注入](#環境変数の注入)
     - [/web コンパイル](#web-コンパイル)
     - [/api コンパイル](#api-コンパイル)
     - [/api データベースの準備](#api-データベースの準備)
-    - [起動](#起動)
+      - [起動と作成](#起動と作成)
+      - [マイグレーション](#マイグレーション)
+    - [アプリ起動](#アプリ起動)
   - [改造してみる](#改造してみる)
     - [/web フロントエンド](#web-フロントエンド)
     - [/api バックエンド](#api-バックエンド)
@@ -43,7 +45,15 @@
 ### [Ubuntu 20.04 LTS][Ubuntu_20.04_LTS]
 ### [VS Code][VS_Code]
 ### [Rust][Rust]
+```
+cargo --version
+```
+> cargo 1.55.0 (32da73ab1 2021-08-23)
 ### [Elm][Elm]
+```
+elm --version
+```
+> 0.19.1
 ### sass
 ```
 curl -L -o sass.tar.gz https://github.com/sass/dart-sass/releases/download/1.42.1/dart-sass-1.42.1-linux-x64.tar.gz
@@ -54,20 +64,19 @@ tar -zxvf sass.tar.gz dart-sass/sass
 ```
 sudo mv dart-sass/sass /usr/local/bin/
 ```
+
+```
+sass --version
+```
+> 1.42.1
+
 ```
 rm -r dart-sass sass.tar.gz
 ```
 ### [PostgreSQL][PostgreSQL]
 * __ステップ1__ のみ
-
-```
-sudo pg_ctlcluster 12 main start
-```
-```
-sudo -u postgres createdb sprig_my
-```
 ## アプリを動かす
-### [Sprig][Sprig]ソースコードの入手
+### [Sprig][Sprig] ソースコードの入手
 ```
 cd ~
 ```
@@ -78,7 +87,7 @@ mkdir clones
 cd clones
 ```
 ```
-git clone --recursive https://github.com/s8sato/works-sprig.git sprig
+git clone -b intro --recurse-submodules https://github.com/s8sato/works-sprig.git sprig
 ```
 ```
 code sprig
@@ -114,12 +123,32 @@ elm make src/Main.elm --output=elm.js
 cd ~/clones/sprig/api
 ```
 ```
+sudo apt install ca-certificates libssl-dev pkg-config
+```
+```
 cargo build
 ```
 ### /api データベースの準備
 ```
 cd ~/clones/sprig/api
 ```
+#### 起動と作成
+```
+sudo pg_ctlcluster 12 main start
+```
+```
+sudo -u postgres createdb sprig_intro
+```
+```
+sudo -u postgres psql sprig_intro
+```
+```
+ALTER USER postgres WITH PASSWORD 'postgres';
+```
+```
+\q
+```
+#### マイグレーション
 ```
 sudo apt install build-essential libpq-dev
 ```
@@ -129,7 +158,7 @@ cargo install diesel_cli --no-default-features --features postgres
 ```
 diesel migration run
 ```
-### 起動
+### アプリ起動
 ```
 cd ~
 ```
@@ -139,6 +168,8 @@ mv clones/intro-dev-web/sprig.sh .
 ```
 bash sprig.sh
 ```
+http://localhost:8000/index.html
+
 ## 改造してみる
 ### /web フロントエンド
 * ロゴを入れる

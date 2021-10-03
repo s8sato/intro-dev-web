@@ -14,7 +14,7 @@ readonly IS_DEMO="True"
 # ./api/
 readonly ACCESS_CONTROL_ALLOW_ORIGIN="http://localhost:8000"
 readonly CMD_HELP_DIR="src/handlers/app/_cmd_help"
-readonly DATABASE_URL="postgres://postgres:${DB_PASSWORD}@localhost:5432/sprig_my"
+readonly DATABASE_URL="postgres://postgres:${DB_PASSWORD}@localhost:5432/sprig_intro"
 readonly EMAIL_API="SparkPost" # or "SendGrid"
 readonly IS_CROSS_ORIGIN="true"
 readonly SENDER_NAME="Sprig"
