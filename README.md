@@ -32,7 +32,7 @@
 [Rust]: https://www.rust-lang.org/ja/
 [Elm]: https://guide.elm-lang.jp/install/elm.html
 [PostgreSQL]: https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart-ja
-[Sprig]: https://github.com/s8sato/works-sprig
+[Sprig]: https://github.com/s8sato/sprig
 
 
 ## コミュニケーションの確保
@@ -81,36 +81,36 @@ rm -r dart-sass sass.tar.gz
 cd ~
 ```
 ```
-mkdir clones
+mkdir works
 ```
 ```
-cd clones
+cd works
 ```
 ```
-git clone -b intro --recurse-submodules https://github.com/s8sato/works-sprig.git sprig
+git clone -b intro --recurse-submodules https://github.com/s8sato/sprig.git
 ```
 ```
 code sprig
 ```
 ### 環境変数の注入
 ```
-cd ~/clones
+cd ~/works
 ```
 ```
 git clone https://github.com/s8sato/intro-dev-web.git
 ```
 ```
-mv intro-dev-web/init.sh sprig/
+mv intro-dev-web/init.local.sh sprig/
 ```
 ```
 cd sprig
 ```
 ```
-bash init.sh
+bash init.local.sh
 ```
 ### /web コンパイル
 ```
-cd ~/clones/sprig/web
+cd ~/works/sprig/web
 ```
 ```
 sass src/scss/style.scss style.css
@@ -120,27 +120,27 @@ elm make src/Main.elm --output=elm.js
 ```
 ### /api コンパイル
 ```
-cd ~/clones/sprig/api
+cd ~/works/sprig/api
 ```
 ```
-sudo apt install ca-certificates libssl-dev pkg-config
+sudo apt install build-essential pkg-config ca-certificates libssl-dev libpq-dev
 ```
 ```
 cargo build
 ```
 ### /api データベースの準備
 ```
-cd ~/clones/sprig/api
+cd ~/works/sprig/api
 ```
 #### 起動と作成
 ```
 sudo pg_ctlcluster 12 main start
 ```
 ```
-sudo -u postgres createdb sprig_intro
+sudo -u postgres createdb sprig_my
 ```
 ```
-sudo -u postgres psql sprig_intro
+sudo -u postgres psql sprig_my
 ```
 ```
 ALTER USER postgres WITH PASSWORD 'postgres';
@@ -149,9 +149,6 @@ ALTER USER postgres WITH PASSWORD 'postgres';
 \q
 ```
 #### マイグレーション
-```
-sudo apt install build-essential libpq-dev
-```
 ```
 cargo install diesel_cli --no-default-features --features postgres
 ```
@@ -163,7 +160,7 @@ diesel migration run
 cd ~
 ```
 ```
-mv clones/intro-dev-web/sprig.sh .
+mv works/intro-dev-web/sprig.sh .
 ```
 ```
 bash sprig.sh

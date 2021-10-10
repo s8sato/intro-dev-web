@@ -3,18 +3,18 @@
 readonly ARGS=0
 readonly DB_PASSWORD="postgres"
 readonly EMAIL_API_KEY="&=="
-readonly SECRET_KEY="01230123012301230123012301230123"
+readonly SECRET_KEY="11112222333344445555666677778888"
 readonly SENDING_EMAIL_ADDRESS="mail@domain.com"
 # ./
 readonly API_PORT=3000
 readonly INDENT="    "
 # ./web/
 readonly API_HOST="http://localhost"
-readonly IS_DEMO="True"
+readonly IS_DEMO="False"
 # ./api/
 readonly ACCESS_CONTROL_ALLOW_ORIGIN="http://localhost:8000"
 readonly CMD_HELP_DIR="src/handlers/app/_cmd_help"
-readonly DATABASE_URL="postgres://postgres:${DB_PASSWORD}@localhost:5432/sprig_intro"
+readonly DATABASE_URL="postgres://postgres:${DB_PASSWORD}@localhost:5432/sprig_my"
 readonly EMAIL_API="SparkPost" # or "SendGrid"
 readonly IS_CROSS_ORIGIN="true"
 readonly SENDER_NAME="Sprig"
